@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo:wght@100;200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap');
+
+:root {
+    --text-col: #9e2a2b;
+}
+
+body {
+    margin:0; 
+    padding:0; 
+}
+
+#map { 
+    position:absolute; 
+    top:0; 
+    bottom:0; 
+    height: 100vh;
+    width:100vw; 
+}
+
+.title-card {
+    display: flexbox;
+    position: absolute;
+    top: 2vh;
+    right: 1.5vw;
+    z-index: 1000;
+}
+
+.title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--text-col);
+    margin-top: 0.7em;
+}
+
+.subtitle {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-col);
+    font-size: 1rem;
+    margin: 0;
+    float: right;
+}
+
+/* Pop Up */
+#popup_name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+#popup_email {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin-top: 1px;
+    margin-bottom: 3px;
+}
+
+#popup_address, #popup_date {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin-top: 1px;
+    margin-bottom: 0;
+}
+
+/* Form */
+.form-page {
+    text-align: center;
+    margin: 0;
+}
+
+.form-title {
+    transform: translateY(-50%);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    max-width: 400px;
+}
+  
+label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    float: left;
+    margin-bottom: 10px;
+}
+  
+input, select {
+    width: 60%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 0.8px solid #ccc;
+    margin-bottom: 16px;
+}
+
+select {
+    width: 64.5%;
+    text-align: right;
+}
+
+button {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+  
+button:hover,
+button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+/* Mobile */
+@media screen and (max-width: 800px) {
+    .title {
+        margin-top: 20px;
+        font-size: 1.5rem;
+    }
+
+    .form-title h1 {
+        font-size: 2rem;
+    }
+
+    .leaflet-control-zoom {
+        display: none;
+    }
+
+    input {
+        width: 80%;
+    }
+
+    select {
+        width: 84.5%;
+    }
+}
