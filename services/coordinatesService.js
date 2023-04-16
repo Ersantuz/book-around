@@ -5,7 +5,7 @@ async function getCoordinates(address) {
     const response = await axios.get(url);
     const result = response.data[0];
     const { lat, lon } = result;
-    return { lat, lon };
+    return { lat, lon }; 
 };
 
 module.exports = {

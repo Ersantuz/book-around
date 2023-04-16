@@ -15,8 +15,27 @@
             <h1 class="title">Uomini e donne di cui innamorarsi</h1>
         </section>
         <section id="map"></section>
+        <section class="planet">
+            <button class="btn-moon"><img src="./assets/img/moon.png" alt="moon"><span> - Luna</span></button>
+            <button class="btn-mercury"><img src="./assets/img/mercury.png" alt="mercury"><span> - Mercurio</span></button>
+            <button class="btn-venus"><img src="./assets/img/venus.png" alt="venus"><span> - Venere</span></button>
+            <button class="btn-mars"><img src="./assets/img/mars.png" alt="mars"><span> - Marte</span></button>
+            <button class="btn-jupiter"><img src="./assets/img/jupiter.png" alt="jupiter"><span> - Giove</span></button>
+            <button class="btn-saturn"><img src="./assets/img/saturn.png" alt="saturn"><span> - Saturno</span></button>
+            <button class="btn-sun"><img src="./assets/img/sun.png" alt="uranus"><span> - Sole</span></button>
+        </section>
+        <section class="modal hidden">
+            <div class="flex">
+                <a class="btn-close">⨉</a>
+            </div>
+            <article></article> 
+        </section> 
+        <div class="overlay hidden"></div>
+        <button class="btn btn-open btn-modal"><i class="fa-solid fa-info" style="color: #9e2a2b;"></i></button>
     </main>
+    <script src="https://kit.fontawesome.com/5a447ed7c5.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

@@ -5,39 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Dicci di te</title>
+    <title>Uomini e Donne di cui innamorarsi</title>
 </head>
 <body>
     <div class="form">
         <section class="form-title">
-            <h1 class="title form-page">Parlaci di te</h1>
-            <p class="subtitle form-page">Compila il form per tracciare la storia del libro</p>
+            <h1 class="title form-page">Unisciti al viaggio</h1>
+            <p class="subtitle form-page">Traccia con noi la storia del libro</p>
         </section>
         <form action="/form" method="post">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-    
-            <label for="cognome">Cognome:</label>
-            <input type="text" id="cognome" name="cognome" required>
+            <input type="text" id="nome" name="nome" placeholder="Nome/Soprannome" required>
         
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" placeholder="Non verrà divulgata :)" required>
 
-            <label for="tipo">Numero copia:</label>
+            <label for="tipo">Copia Astrale:</label>
             <select id="tipo" name="tipo">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
+                <option value="1">Luna</option>
+                <option value="2">Sole</option>
+                <option value="3">Venere</option>
+                <option value="4">Giove</option>
+                <option value="5">Marte</option>
+                <option value="6">Saturno</option>
+                <option value="7">Mercurio</option>
             </select>
+
+            <label for="daChi">Da chi lo hai ricevuto?</label>
+            <input type="text" id="daChi" name="daChi" placeholder="Amico, Amante, Barbone..." required>
     
             <label for="indirizzo">Dove lo leggerai?</label>
-            <input type="text" id="indirizzo" name="indirizzo" required>
+            <input type="text" id="indirizzo" name="indirizzo" placeholder="Via" required>
+            <input type="text" id="citta" name="citta" placeholder="Città" required>
+
+            
         
-            <button type="submit">Aggregati</button>
+            <button type="submit">Parti</button>
         </form>
     </div>
 </body>

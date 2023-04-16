@@ -15,6 +15,7 @@ body {
     bottom:0; 
     height: 100vh;
     width:100vw; 
+    z-index: 0;
 }
 
 .title-card {
@@ -22,7 +23,7 @@ body {
     position: absolute;
     top: 2vh;
     right: 1.5vw;
-    z-index: 1000;
+    z-index: 1;
 }
 
 .title {
@@ -40,10 +41,114 @@ body {
     float: right;
 }
 
+/* Modal */
+.modal {
+    position: fixed;
+    text-align: center;
+    width: 60%;
+    max-height: 80%;
+    position: absolute;
+    transform: translate(35%, 15%);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    z-index: 3;
+}
+  
+.modal .flex {
+    float: right;
+}
+
+.btn-close {
+    position: absolute;
+    color: var(--text-col);
+    font-size: large;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;    
+}
+
+.hidden {
+    display: none;
+}
+
+.btn-modal {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 50%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 2;
+}
+
+i {
+    font-size: 1.2rem;
+    color: var(--text-col);
+}
+
+/* Planet */
+.planet {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.planet button {
+    margin: 3px 0;
+    border-radius: 5px;
+    width: 130px;
+}
+
+.planet img {
+    text-align: right;
+    width: 15px;
+}
+
+.planet span {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-left: 3px;
+}
+
+.active {
+    background-color: #efeaea;
+}
+
+/* Polyline */
+.my_polyline {
+    stroke: #9e2a2b;
+    stroke-width: 2;
+    fill: none;
+    z-index: 1;
+}
+
 /* Pop Up */
 #popup_name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin: 0;
 }
@@ -55,11 +160,30 @@ body {
     margin-bottom: 3px;
 }
 
-#popup_address, #popup_date {
+#popup_address, #popup_date, #popup_from {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     margin-top: 1px;
     margin-bottom: 0;
+}
+
+span {
+    font-style: italic;
+    font-size: 0.5;
+    font-weight: 300;
+}
+
+/* Cluster */
+.marker-cluster {
+    background-color: var(--text-col);
+    border-radius: 50%;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height:30px;
+    max-height: 30px;
+    max-width: 30px;
 }
 
 /* Form */
@@ -69,7 +193,7 @@ body {
 }
 
 .form-title {
-    transform: translateY(-50%);
+    transform: translateY(-70%);
 }
 
 .form {
@@ -90,7 +214,7 @@ form {
   
 label {
     font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
     float: left;
     margin-bottom: 10px;
 }
@@ -105,7 +229,6 @@ input, select {
 
 select {
     width: 64.5%;
-    text-align: right;
 }
 
 button {
