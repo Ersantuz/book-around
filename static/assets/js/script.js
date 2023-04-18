@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Map
     var map = L.map('map').setView([41.902782, 12.496366], 11);
-    L.tileLayer('http://tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
+    L.tileLayer('https://tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
 
     // Create a Marker Cluster Group layer with automatic clustering
     const markers = L.markerClusterGroup({
