@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             iconSize: [30, 30],
             iconAnchor: [15, 15]
         });
-    }
+    };
 
     // Map
     var map = L.map('map').setView([41.902782, 12.496366], 11);
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add Polylines to map
         for (let key in poly) {
             L.polyline(poly[key], { className: `my_polyline my_polyline${key} hidden` }).addTo(map);
-        }
+        };
     });
     // Add markers to map
     map.addLayer(markers);
@@ -94,7 +94,7 @@ async function getData() {
     });
 
     return response;
-}
+};
 
 /** Capitalize every word of a string */
 function capitalize(str) {
@@ -107,7 +107,7 @@ function capitalize(str) {
     return words.map((word) => { 
                 return word[0].toUpperCase() + word.substring(1); 
             }).join(" ");
-}
+};
 
 /** Remove hidden class to modal */
 const openModal = function () {
@@ -160,7 +160,7 @@ const planetBtns = [
     document.querySelector(".btn-mars"),
     document.querySelector(".btn-saturn"),
     document.querySelector(".btn-mercury")
-]
+];
 
 for(let i = 0; i < planetBtns.length; i++) {
     planetBtns[i].addEventListener("click", () => {

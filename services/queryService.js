@@ -22,7 +22,6 @@ async function newBook(form) {
         const books = await getBooks();
         // Get most recent book id by type
         const lastBook = books.filter(book => book.tipo == form.tipo).slice(-1)[0].id;
-        console.log(lastBook);
 
         // Get values from form
         const via = `${form.indirizzo}, ${form.citta}`
