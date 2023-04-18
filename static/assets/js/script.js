@@ -20,8 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Map
+    var layer = new L.StamenTileLayer("watercolor");
     var map = L.map('map').setView([41.902782, 12.496366], 11);
-    L.tileLayer('https://tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
+    map.addLayer(layer);
+    //L.tileLayer('https://tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
 
     // Create a Marker Cluster Group layer with automatic clustering
     const markers = L.markerClusterGroup({
