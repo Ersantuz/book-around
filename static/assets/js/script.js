@@ -14,6 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
     for(let i = 1; i <= 7; i++) {
         planetToIcon[i] = L.icon({
             iconUrl: `./assets/img/${typeToPlanet[i]}.png`,
+            iconSize: [20, 20],
+            iconAnchor: [15, 15],
+            className: 'not-last'
+        });
+    };
+
+    let planetToLastIcon = {}
+    for(let i = 1; i <= 7; i++) {
+        planetToLastIcon[i] = L.icon({
+            iconUrl: `./assets/img/${typeToPlanet[i]}.png`,
             iconSize: [30, 30],
             iconAnchor: [15, 15]
         });
@@ -23,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     var layer = new L.StamenTileLayer("watercolor");
     var map = L.map('map').setView([41.902782, 12.496366], 11);
     map.addLayer(layer);
-    //L.tileLayer('https://tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
 
     // Create a Marker Cluster Group layer with automatic clustering
     const markers = L.markerClusterGroup({
@@ -67,7 +76,15 @@ document.addEventListener("DOMContentLoaded", () => {
             let popup = nome + daChi + data + indirizzo;
 
             // find icon type
-            const planet = planetToIcon[book.tipo];
+            // Check if it's the last book of the type on id
+            // filter books by type and check if the id is the last one
+            console.log(book.id == books.filter((b) => b.tipo === book.tipo).slice(-1)[0].id);
+            let planet;
+            if (book.id == books.filter((b) => b.tipo === book.tipo).slice(-1)[0].id) {
+                planet = planetToLastIcon[book.tipo];
+            } else {
+                planet = planetToIcon[book.tipo];
+            };
 
             markers.addLayer(L.marker([book.lat, book.lon], { icon: planet }).bindPopup(popup));
         });

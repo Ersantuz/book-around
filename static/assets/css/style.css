@@ -41,14 +41,18 @@ body {
     float: right;
 }
 
+.not-last {
+    opacity: 0.6 !important;
+}
+
 /* Modal */
 .modal {
-    position: fixed;
     text-align: center;
-    width: 60%;
+    width: fit-content;
+    max-width: 60%;
     max-height: 80%;
     position: absolute;
-    transform: translate(35%, 15%);
+    transform: translate(30%, 13%);
     top: 0;
     right: 0;
     bottom: 0;
@@ -57,10 +61,54 @@ body {
     border: 1px solid #ddd;
     border-radius: 15px;
     z-index: 3;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    margin: 15px;
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: var(--text-col);
 }
   
 .modal .flex {
     float: right;
+}
+
+.modal article {
+    margin: 0 8%;
+    text-align: left;
+    transform: translateY(6vw);
+}
+
+.modal .title {
+    text-align: center;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.modal .subtitle {
+    margin: 0;
+    float: none;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal p {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 .btn-close {
@@ -81,6 +129,8 @@ body {
 }
 
 .btn-modal {
+    height: 60px;
+    width: 60px;
     position: fixed;
     bottom: 30px;
     right: 30px;
@@ -299,5 +349,17 @@ button:active {
 
     select {
         width: 84.5%;
+    }
+
+    .planet button {
+        width: fit-content;
+    }
+
+    .planet span {
+        display: none;
+    }
+
+    .modal p{
+        font-size: 0.8rem;
     }
 }
