@@ -31,7 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Map
     var layer = new L.StamenTileLayer("watercolor");
-    var map = L.map('map').setView([41.902782, 12.496366], 11);
+    layer.options.minZoom = 3;
+    layer.options.maxZoom = 15;
+    var map = L.map('map').setView([42.99287129051785, 12.671979715325687], 6);
+
     map.addLayer(layer);
 
     // Create a Marker Cluster Group layer with automatic clustering
@@ -84,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 planet = planetToIcon[book.tipo];
             };
 
-            markers.addLayer(L.marker([book.lat, book.lon], { icon: planet }).bindPopup(popup));
+            markers.addLayer(L.marker([book.lat, book.lon], { icon: planet, className: `${typeToPlanet[book.tipo]}` }).bindPopup(popup));
         });
     }).then(() => {
         // Add Polylines to map
