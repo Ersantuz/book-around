@@ -20,8 +20,6 @@ async function newBook(form) {
     try{
         // Get Books
         const books = await getBooks();
-        // Get most recent book id by type
-        const lastBook = books.filter(book => book.tipo == form.tipo).slice(-1)[0].id;
 
         // Get values from form
         const via = `${form.indirizzo}, ${form.citta}`
@@ -29,8 +27,8 @@ async function newBook(form) {
         const { lat, lon } = await getCoordinates(via);
 
         // Insert new book
-        const queryVal = `('${tipo}', '${nome}', '${email}', '${via}', '${lat}', '${lon}', '${lastBook}', '${daChi}');`;
-        let query = `INSERT INTO books (tipo, nome, email, indirizzo, lat, lon, id_precedente, da_chi) VALUES ` + queryVal;
+        const queryVal = `('${tipo}', '${nome}', '${email}', '${via}', '${lat}', '${lon}', '${daChi}');`;
+        let query = `INSERT INTO books (tipo, nome, email, indirizzo, lat, lon, da_chi) VALUES ` + queryVal;
         conn = await pool.getConnection();
         await conn.query(query)
                 .then(result => {

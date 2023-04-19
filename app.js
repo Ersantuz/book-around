@@ -37,6 +37,7 @@ app.post('/form', async (req, res) => {
         await newBook(req.body);
         res.redirect('/');
     } catch (err) {
+        console.log(err);
         res.send(err);
     }
 });

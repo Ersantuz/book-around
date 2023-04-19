@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Markers
     getData().then(books => {
         books.forEach(book => {
-            console.log(book);
 
             // Add coordinates to polyline
             poly[book.tipo].push([book.lat, book.lon]);
@@ -78,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // find icon type
             // Check if it's the last book of the type on id
             // filter books by type and check if the id is the last one
-            console.log(book.id == books.filter((b) => b.tipo === book.tipo).slice(-1)[0].id);
             let planet;
             if (book.id == books.filter((b) => b.tipo === book.tipo).slice(-1)[0].id) {
                 planet = planetToLastIcon[book.tipo];
