@@ -190,7 +190,9 @@ i {
 /* Polyline */
 .my_polyline {
     stroke: #9e2a2b;
-    stroke-width: 2;
+    stroke-width: 1;
+    stroke-opacity: 0.9;
+    stroke-dasharray: 5, 5;
     fill: none;
     z-index: 1;
 }
