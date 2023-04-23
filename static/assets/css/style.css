@@ -18,6 +18,7 @@ body {
     z-index: 0;
 }
 
+/* Title */
 .title-card {
     display: flexbox;
     position: absolute;
@@ -30,6 +31,7 @@ body {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2rem;
     color: var(--text-col);
+    margin: 0;
     margin-top: 0.7em;
 }
 
@@ -41,8 +43,41 @@ body {
     float: right;
 }
 
-.not-last {
-    opacity: 0.6 !important;
+.social {
+    float: right;
+    margin: 0;
+}
+
+.social i {
+    font-size: 1.5rem;
+    color: var(--text-col);
+    margin: 0 0.2em;
+    cursor: pointer;
+}
+
+.social i:hover {
+    opacity: 0.6;
+    font-size: 1.6rem;
+}
+
+.social iframe {
+    max-width: 80%;
+}
+
+/* Playlist */
+.playlist {
+    display: flex;
+}
+
+.btn-close-playlist {
+    float: right;
+    color: var(--text-col);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.LKKneJCVRLbYQrEtNZ8g {
+    background-color: var(--text-col) !important;
 }
 
 /* Modal */
@@ -185,6 +220,11 @@ i {
 
 .active {
     background-color: #efeaea;
+}
+
+/* Marker */
+.not-last {
+    opacity: 0.6 !important;
 }
 
 /* Polyline */
@@ -333,8 +373,9 @@ button:active {
 /* Mobile */
 @media screen and (max-width: 800px) {
     .title {
-        margin-top: 20px;
+        margin-top: 0;
         font-size: 1.5rem;
+        float: right;
     }
 
     .form-title h1 {
@@ -364,4 +405,16 @@ button:active {
     .modal p{
         font-size: 0.8rem;
     }
+
+    .social {
+        margin: 50px 5px;
+        right: 0;
+        position: fixed;
+    }
+
+    .playlist-modal {
+        width: 72%;
+        float: right;    
+    }
+
 }

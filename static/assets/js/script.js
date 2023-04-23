@@ -141,13 +141,13 @@ const closeModal = function () {
     overlay.classList.add("hidden");
 };
 
-/** Check if polyline is visible, if visible add class hidden and viceversa */
-const openPoly = function (poly) {
-    const classHidden = poly.classList.contains("hidden");
+/** Check if is visible, if visible add class hidden and viceversa */
+const open = function (element) {
+    const classHidden = element.classList.contains("hidden");
     if (classHidden) {
-        poly.classList.remove("hidden");
+        element.classList.remove("hidden");
     } else {
-        poly.classList.add("hidden");
+        element.classList.add("hidden");
     }
 };
 
@@ -161,6 +161,18 @@ const activeBtn = function (btn) {
     }
 };
 
+/** Open playlist **/
+const openPlaylist = function () {
+    icons.classList.add("hidden");
+    playlist.classList.remove("hidden");
+};
+
+/** Close playlist **/
+const closePlaylist = function () {
+    icons.classList.remove("hidden");
+    playlist.classList.add("hidden");
+};
+
 /* Modal */
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
@@ -170,6 +182,15 @@ const closeModalBtn = document.querySelector(".btn-close");
 openModalBtn.addEventListener("click", openModal);
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
+
+/* Playlist */
+const icons = document.querySelector(".social");
+const playlist = document.querySelector(".playlist-modal");
+const playlistBtn = document.querySelector("#spotify");
+const closePlaylistBtn = document.querySelector(".btn-close-playlist");
+
+playlistBtn.addEventListener("click", openPlaylist);
+closePlaylistBtn.addEventListener("click", closePlaylist);
 
 /* Connecting the dots */
 const planetBtns = [
@@ -186,6 +207,6 @@ for(let i = 0; i < planetBtns.length; i++) {
     planetBtns[i].addEventListener("click", () => {
         activeBtn(planetBtns[i]);
         const planetPoly = document.querySelector(`.my_polyline${i + 1}`);
-        openPoly(planetPoly);
+        open(planetPoly);
     });
 };
