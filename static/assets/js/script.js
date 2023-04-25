@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             iconUrl: `./assets/img/${typeToPlanet[i]}.png`,
             iconSize: [20, 20],
             iconAnchor: [15, 15],
-            className: 'not-last'
+            className: 'not-last hidden'
         });
     };
 
@@ -173,6 +173,27 @@ const closePlaylist = function () {
     playlist.classList.add("hidden");
 };
 
+/** Open Planet Buttons */
+const openPlanets = function() {
+    let notLast = document.querySelectorAll(".not-last");
+    console.log(notLast);
+    notLast.forEach((planet) => {
+        planet.classList.remove("hidden");
+    });
+    document.querySelector(".planet-open").classList.remove("hidden");
+    document.querySelector(".planet-close").classList.add("hidden");
+}
+
+/** Close Planet Buttons */
+const closePlanets = function() {
+    let notLast = document.querySelectorAll(".not-last");
+    notLast.forEach((planet) => {
+        planet.classList.add("hidden");
+    });
+    document.querySelector(".planet-open").classList.add("hidden");
+    document.querySelector(".planet-close").classList.remove("hidden");
+}
+
 /* Modal */
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
@@ -191,6 +212,13 @@ const closePlaylistBtn = document.querySelector(".btn-close-playlist");
 
 playlistBtn.addEventListener("click", openPlaylist);
 closePlaylistBtn.addEventListener("click", closePlaylist);
+
+/* Planet Buttons */
+const planetOpenBtn = document.querySelector(".btn-boat");
+const planetCloseBtn = document.querySelector(".btn-close-btn");
+
+planetOpenBtn.addEventListener("click", openPlanets);
+planetCloseBtn.addEventListener("click", closePlanets);
 
 /* Connecting the dots */
 const planetBtns = [

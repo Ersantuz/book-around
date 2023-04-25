@@ -18,6 +18,10 @@ body {
     z-index: 0;
 }
 
+.leaflet-control-attribution {
+    opacity: 0.3;
+}
+
 /* Title */
 .title-card {
     display: flexbox;
@@ -57,7 +61,6 @@ body {
 
 .social i:hover {
     opacity: 0.6;
-    font-size: 1.6rem;
 }
 
 .social iframe {
@@ -74,10 +77,6 @@ body {
     color: var(--text-col);
     font-size: 1.5rem;
     cursor: pointer;
-}
-
-.LKKneJCVRLbYQrEtNZ8g {
-    background-color: var(--text-col) !important;
 }
 
 /* Modal */
@@ -160,7 +159,7 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .btn-modal {
@@ -220,6 +219,28 @@ i {
 
 .active {
     background-color: #efeaea;
+}
+
+.btn-close-btn {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 20% 0 5% 0;
+    font-size: x-large;  
+}
+
+.btn-boat {
+    width: fit-content !important;  
+    margin: 0 !important;
+}
+
+.btn-boat img {
+    width: 25px;
+}
+
+.btn-boat span {
+    font-size: 0.9rem;
+    margin-left: 10px;
 }
 
 /* Marker */
@@ -392,6 +413,14 @@ button:active {
 
     select {
         width: 84.5%;
+    }
+
+    .btn-modal {
+        right: 15px;
+    }
+
+    .planet {
+        left: 15px;
     }
 
     .planet button {
