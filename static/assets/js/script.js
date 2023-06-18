@@ -1,39 +1,60 @@
+// Define map variables
+var map;
+var zoomLevel = 6;
+var mapCenter = [42.99287129051785, 12.671979715325687];
+var isOpen = false;
+var selectedPlanet = "all";
+
+// Initialize the map when the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-    // Icons
-    const typeToPlanet = {
-        "1": "moon",
-        "2": "sun",
-        "3": "venus",
-        "4": "jupiter",
-        "5": "mars",
-        "6": "saturn",
-        "7": "mercury"
-    };
+    buildMap(zoomLevel, mapCenter, isOpen, selectedPlanet);
+});
 
-    let planetToIcon = {}
-    for(let i = 1; i <= 7; i++) {
-        planetToIcon[i] = L.icon({
-            iconUrl: `./assets/img/${typeToPlanet[i]}.png`,
-            iconSize: [20, 20],
-            iconAnchor: [15, 15],
-            className: 'not-last hidden'
-        });
-    };
+/* Icons */
+const typeToPlanet = {
+    "1": "moon",
+    "2": "sun",
+    "3": "venus",
+    "4": "jupiter",
+    "5": "mars",
+    "6": "saturn",
+    "7": "mercury"
+};
 
-    let planetToLastIcon = {}
-    for(let i = 1; i <= 7; i++) {
-        planetToLastIcon[i] = L.icon({
-            iconUrl: `./assets/img/${typeToPlanet[i]}.png`,
-            iconSize: [30, 30],
-            iconAnchor: [15, 15]
-        });
-    };
+// Create an icon for each type of planet
+let planetToIcon = {}
+for(let i = 1; i <= 7; i++) {
+    planetToIcon[i] = L.icon({
+        iconUrl: `./assets/img/${typeToPlanet[i]}.png`,
+        iconSize: [20, 20],
+        iconAnchor: [15, 15],
+        className: `not-last ${typeToPlanet[i]}`
+    });
+};
 
+let planetToLastIcon = {}
+for(let i = 1; i <= 7; i++) {
+    planetToLastIcon[i] = L.icon({
+        iconUrl: `./assets/img/${typeToPlanet[i]}.png`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
+        className: `${typeToPlanet[i]}`
+    });
+};
+
+/* Functions */
+
+/** Build the map */
+function buildMap(zoomLevel, mapCenter, isOpen, selectedPlanet) {
+    // Remove map if already exists
+    if (map != undefined) {
+        map.remove();
+    };
     // Map
     var layer = new L.StamenTileLayer("watercolor");
     layer.options.minZoom = 3;
     layer.options.maxZoom = 15;
-    var map = L.map('map').setView([42.99287129051785, 12.671979715325687], 6);
+    map = L.map('map').setView(mapCenter, zoomLevel);
 
     map.addLayer(layer);
 
@@ -46,21 +67,20 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Create an array of coordinates for the Polyline
     let poly = {
-        "1": [],
-        "2": [],
-        "3": [],
-        "4": [],
-        "5": [],
-        "6": [],
-        "7": []
+        "moon": [],
+        "sun": [],
+        "venus": [],
+        "jupiter": [],
+        "mars": [],
+        "saturn": [],
+        "mercury": []
     };
 
     // Markers
     getData().then(books => {
         books.forEach(book => {
-
             // Add coordinates to polyline
-            poly[book.tipo].push([book.lat, book.lon]);
+            poly[typeToPlanet[book.tipo]].push([book.lat, book.lon]);
 
             // Format date
             const date = new Date(book.data);
@@ -81,26 +101,34 @@ document.addEventListener("DOMContentLoaded", () => {
             // Check if it's the last book of the type on id
             // filter books by type and check if the id is the last one
             let planet;
-            if (book.id == books.filter((b) => b.tipo === book.tipo).slice(-1)[0].id) {
+            let isLast = (book.id == books.filter((b) => b.tipo === book.tipo).slice(-1)[0].id); 
+            if (isLast) {
                 planet = planetToLastIcon[book.tipo];
             } else {
                 planet = planetToIcon[book.tipo];
             };
-
-            markers.addLayer(L.marker([book.lat, book.lon], { icon: planet, className: `${typeToPlanet[book.tipo]}` }).bindPopup(popup));
+            // Add marker to cluster group
+            if (isLast && !isOpen && selectedPlanet === "all") {
+                markers.addLayer(L.marker([book.lat, book.lon], { icon: planet, className: `${typeToPlanet[book.tipo]}` }).bindPopup(popup));
+            } else if (isOpen && selectedPlanet === "all") {
+                markers.addLayer(L.marker([book.lat, book.lon], { icon: planet, className: `${typeToPlanet[book.tipo]}` }).bindPopup(popup));
+            } else if (selectedPlanet === typeToPlanet[book.tipo]) {
+                markers.addLayer(L.marker([book.lat, book.lon], { icon: planet, className: `${typeToPlanet[book.tipo]}` }).bindPopup(popup));
+            };
+    
         });
     }).then(() => {
+        console.log(poly[`${selectedPlanet}`]);
         // Add Polylines to map
-        for (let key in poly) {
-            L.polyline(poly[key], { className: `my_polyline my_polyline${key} hidden` }).addTo(map);
+        if (selectedPlanet !== "all") {
+            // Show selected planet polyline
+            L.polyline(poly[`${selectedPlanet}`], { className: `my_polyline my_polyline${selectedPlanet}` }).addTo(map);
         };
     });
     // Add markers to map
     map.addLayer(markers);
+};
 
-});
-
-/* Functions */
 /** Call API to get data from the database */
 async function getData() {
     const response = await fetch('/data', {
@@ -141,57 +169,78 @@ const closeModal = function () {
     overlay.classList.add("hidden");
 };
 
-/** Check if is visible, if visible add class hidden and viceversa */
-const open = function (element) {
-    const classHidden = element.classList.contains("hidden");
-    if (classHidden) {
-        element.classList.remove("hidden");
-    } else {
-        element.classList.add("hidden");
-    }
-};
-
 /** Check if button is active, if not add active class and viceversa */
 const activeBtn = function (btn) {
     const classActive = btn.classList.contains("active");
     if (classActive) {
         btn.classList.remove("active");
     } else {
+        for(let i = 0; i < planetBtns.length; i++) {
+            planetBtns[i].classList.remove("active");
+        }
         btn.classList.add("active");
     }
 };
 
+/** Active Planet */
+const activePlanet = function (btn, select) {
+    const classActive = btn.classList.contains("active");
+    if (classActive) {
+        // Show only markers of the button planet
+        zoomLevel = map.getZoom();
+        mapCenter = map.getCenter();
+        selectedPlanet = select;
+        buildMap(zoomLevel, mapCenter, isOpen, selectedPlanet);
+    } else {
+        // Show all markers
+        zoomLevel = map.getZoom();
+        mapCenter = map.getCenter();
+        selectedPlanet = "all";
+        buildMap(zoomLevel, mapCenter, isOpen, selectedPlanet);
+    }
+};
+
 /** Open playlist **/
-const openPlaylist = function () {
+const openPlaylist = function (modal) {
     icons.classList.add("hidden");
-    playlist.classList.remove("hidden");
+    modal.classList.remove("hidden");
 };
 
 /** Close playlist **/
-const closePlaylist = function () {
+const closePlaylist = function (modal) {
     icons.classList.remove("hidden");
-    playlist.classList.add("hidden");
+    modal.classList.add("hidden");
 };
 
 /** Open Planet Buttons */
 const openPlanets = function() {
-    let notLast = document.querySelectorAll(".not-last");
-    console.log(notLast);
-    notLast.forEach((planet) => {
-        planet.classList.remove("hidden");
-    });
     document.querySelector(".planet-open").classList.remove("hidden");
     document.querySelector(".planet-close").classList.add("hidden");
+    isOpen = true;
+    selectedPlanet = "all";
+    // refresh map
+    zoomLevel = map.getZoom();
+    mapCenter = map.getCenter();
+    buildMap(zoomLevel, mapCenter, isOpen, selectedPlanet);
 }
 
 /** Close Planet Buttons */
 const closePlanets = function() {
-    let notLast = document.querySelectorAll(".not-last");
-    notLast.forEach((planet) => {
-        planet.classList.add("hidden");
-    });
+    for(let i = 0; i < planetBtns.length; i++) {
+        if (planetBtns[i].classList.contains("active")) {
+            activeBtn(planetBtns[i]);
+            // Show only markers of the button planet
+            activePlanet(planetBtns[i], typeToPlanet[i +1]);
+        }
+    };
     document.querySelector(".planet-open").classList.add("hidden");
     document.querySelector(".planet-close").classList.remove("hidden");
+    isOpen = false;
+    selectedPlanet = "all";
+    // refresh map
+    zoomLevel = map.getZoom();
+    mapCenter = map.getCenter();
+    buildMap(zoomLevel, mapCenter, isOpen, selectedPlanet);
 }
 
 /* Modal */
@@ -207,11 +256,16 @@ overlay.addEventListener("click", closeModal);
 /* Playlist */
 const icons = document.querySelector(".social");
 const playlist = document.querySelector(".playlist-modal");
+const audio = document.querySelector(".audio-modal");
 const playlistBtn = document.querySelector("#spotify");
+const audioBtn = document.querySelector("#audio");
 const closePlaylistBtn = document.querySelector(".btn-close-playlist");
+const closeAudioBtn = document.querySelector(".btn-close-audio");
 
-playlistBtn.addEventListener("click", openPlaylist);
-closePlaylistBtn.addEventListener("click", closePlaylist);
+playlistBtn.addEventListener("click", () => { openPlaylist(playlist) });
+audioBtn.addEventListener("click", () => { openPlaylist(audio) });
+closePlaylistBtn.addEventListener("click", () => { closePlaylist(playlist) });
+closeAudioBtn.addEventListener("click", () => { closePlaylist(audio) });
 
 /* Planet Buttons */
 const planetOpenBtn = document.querySelector(".btn-boat");
@@ -234,7 +288,7 @@ const planetBtns = [
 for(let i = 0; i < planetBtns.length; i++) {
     planetBtns[i].addEventListener("click", () => {
         activeBtn(planetBtns[i]);
-        const planetPoly = document.querySelector(`.my_polyline${i + 1}`);
-        open(planetPoly);
+        // Show only markers of the button planet
+        activePlanet(planetBtns[i], typeToPlanet[i + 1]);
     });
 };

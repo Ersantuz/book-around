@@ -67,16 +67,21 @@ body {
     max-width: 80%;
 }
 
-/* Playlist */
+/* Playlist & Audio */
 .playlist {
     display: flex;
 }
 
-.btn-close-playlist {
+.btn-close-playlist, .btn-close-audio {
     float: right;
     color: var(--text-col);
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.audio-modal audio {
+    display: flex;
+    margin-bottom: 5px;
 }
 
 /* Modal */
@@ -306,7 +311,7 @@ span {
 }
 
 .form-title {
-    transform: translateY(-70%);
+    transform: translateY(-60%);
 }
 
 .form {
@@ -441,9 +446,17 @@ button:active {
         position: fixed;
     }
 
-    .playlist-modal {
+    .playlist-modal, .audio-modal {
         width: 72%;
         float: right;    
+    }
+
+    audio {
+        width: 90%;
+    }
+
+    .form-title h1 {
+        float: none;
     }
 
 }
