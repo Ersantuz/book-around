@@ -70,6 +70,7 @@ body {
 /* Playlist & Audio */
 .playlist {
     display: flex;
+    width: 92%;
 }
 
 .btn-close-playlist, .btn-close-audio {
