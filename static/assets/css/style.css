@@ -9,6 +9,10 @@ body {
     padding:0; 
 }
 
+a {
+    text-decoration: none;
+}
+
 #map { 
     position:absolute; 
     top:0; 
@@ -397,6 +401,39 @@ button:active {
   transform: translateY(0);
 }
 
+/* Pinterest */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.bg-pink {
+    background-color: #fef7f9;
+}
+
+#planet-imgs > img {
+    width: 10%;
+    margin: 0;
+}
+
+#imgs {
+    position: relative;
+    margin: 10vh 1vw 0 1vw;
+    clear: both;
+    line-height: 1.5;
+    column-count: 4;
+    column-gap: 1;
+}
+
+.gallery-item > img {
+    width: 100%;
+    border-radius: 7px;
+}
+
+.gallery-item > img:hover {
+    transition-duration: 500ms;
+    transform: scale(1.15);
+}
+
 /* Mobile */
 @media screen and (max-width: 800px) {
     .title {
@@ -458,6 +495,10 @@ button:active {
 
     .form-title h1 {
         float: none;
+    }
+
+    #imgs {
+        column-count: 2;
     }
 
 }
