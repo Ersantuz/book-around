@@ -26,6 +26,10 @@ a {
     opacity: 0.3;
 }
 
+.highlight {
+    color: #9e2a2b;
+}
+
 /* Title */
 .title-card {
     display: flexbox;
