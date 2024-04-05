@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
 
 // Routes
-// Map
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/static/index.html');
 });

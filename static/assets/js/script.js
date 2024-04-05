@@ -51,7 +51,7 @@ function buildMap(zoomLevel, mapCenter, isOpen, selectedPlanet) {
         map.remove();
     };
     // Map
-    var layer = new L.StamenTileLayer("watercolor");
+    var layer = new  L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg');
     layer.options.minZoom = 3;
     layer.options.maxZoom = 15;
     map = L.map('map').setView(mapCenter, zoomLevel);
@@ -78,6 +78,7 @@ function buildMap(zoomLevel, mapCenter, isOpen, selectedPlanet) {
 
     // Markers
     getData().then(books => {
+        console.log(books);
         books.forEach(book => {
             // Add coordinates to polyline
             poly[typeToPlanet[book.tipo]].push([book.lat, book.lon]);
