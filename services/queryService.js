@@ -36,7 +36,7 @@ async function newBook(form) {
                     throw error;
                 });
     } catch (err) {
-        throw err;
+        throw "Errore nell'inserimento dei dati (probabilmente l'indirizzo non è valido)";
     };
 }
 
