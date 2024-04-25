@@ -22,10 +22,11 @@ async function newBook(form) {
         const via = `${form.indirizzo}, ${form.citta}`
         const { nome, email, tipo, daChi } = form;
         const { lat, lon } = await getCoordinates(via);
+        const date = new Date();
 
         // Insert new book
-        const queryVal = `('${tipo}', "${nome}", "${email}", "${via}", '${lat}', '${lon}', "${daChi}");`;
-        let query = `INSERT INTO books (tipo, nome, email, indirizzo, lat, lon, da_chi) VALUES ` + queryVal;
+        const queryVal = `('${tipo}', "${nome}", "${email}", "${via}", '${lat}', '${lon}', "${daChi}", "${date}");`;
+        let query = `INSERT INTO books (tipo, nome, email, indirizzo, lat, lon, da_chi, data) VALUES ` + queryVal;
         conn = await pool.getConnection();
         await conn.query(query)
                 .then(result => {
@@ -36,6 +37,7 @@ async function newBook(form) {
                     throw error;
                 });
     } catch (err) {
+        console.log(err);
         throw "Errore nell'inserimento dei dati (probabilmente l'indirizzo non è valido)";
     };
 }
